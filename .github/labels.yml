@@ -1,7 +1,6 @@
 - name: "Type: Bug"
   color: "e80c0c"
   description: Something isn't working as expected.
-  from_name: "Bug"
 
 - name: "Design"
   color: "FFA07A"
@@ -46,7 +45,7 @@
 - name: "Type: Enhancement"
   color: "54b2ff"
   description: Suggest an improvement for an existing feature.
-  from_name: "Enhancement"
+
 
 - name: "Type: Feature"
   color: "54b2ff"
@@ -59,7 +58,7 @@
 - name: "Type: Question"
   color: "9309ab"
   description: Request for information.
-  from_name: "Question"
+
 
 - name: "Type: Test"
   color: "ce54e3"
