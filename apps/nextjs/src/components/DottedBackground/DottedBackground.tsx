@@ -1,162 +1,228 @@
-import { type CSSProperties } from 'react';
+import cn from 'classnames';
 
-export enum RadialTransparency {
-  zero = '0%',
-  ten = '10%',
-  twenty = '20%',
-  thirty = '30%',
-  forty = '40%',
-  fifty = '50%',
-  sixty = '60%',
-  seventy = '70%',
-  eighty = '80%',
-  ninety = '90%',
-  full = '100%',
+export enum Sizes {
+  xs = 'xs',
+  sm = 'sm',
+  base = 'base',
+  lg = 'lg',
+  xl = 'xl',
+  '2xl' = '2xl',
+  '3xl' = '3xl',
+  '4xl' = '4xl',
 }
 
-export enum DotColors {
-  black = 'rgb(0, 0, 0)',
-  gray10 = 'rgb(26, 32, 44)',
-  gray20 = 'rgb(54, 64, 82)',
-  gray30 = 'rgb(82, 93, 113)',
-  gray40 = 'rgb(109, 121, 143)',
-  gray50 = 'rgb(137, 150, 174)',
-  gray60 = 'rgb(164, 178, 204)',
-  gray70 = 'rgb(192, 207, 235)',
-  gray80 = 'rgb(219, 227, 249)',
-  white = 'rgb(255, 255, 255)',
-}
-
-export enum DotsSeparation {
+const DotsSeparations: Record<Sizes, string> = {
   /**
    * equivalent to 5 pixels
    */
-  five = '0.3125rem 0.3125rem',
+  [Sizes.xs]: '0.3125rem 0.3125rem',
 
   /**
    * equivalent to 10 pixels
    */
-  ten = '0.625rem 0.625rem',
+  [Sizes.sm]: '0.625rem 0.625rem',
 
   /**
    * equivalent to 15 pixels
    */
-  fifteen = '0.9375rem 0.9375rem',
+  [Sizes.base]: '0.9375rem 0.9375rem',
 
   /**
    * equivalent to 20 pixels
    */
-  twenty = '1.25rem 1.25rem',
+  [Sizes.lg]: '1.25rem 1.25rem',
 
   /**
    * equivalent to 25 pixels
    */
-  twentyFive = '1.5625rem 1.5625rem',
-}
+  [Sizes.xl]: '1.5625rem 1.5625rem',
 
-export enum DotsSizes {
+  /**
+   * equivalent to 30 pixels
+   */
+  [Sizes['2xl']]: '1.875rem 1.875rem',
+
+  /**
+   * Equivalent to 35 pixels
+   */
+  [Sizes['3xl']]: '2.1875rem 2.1875rem',
+
+  /**
+   * Equivalent to 40 pixels
+   */
+  [Sizes['4xl']]: '2.5rem 2.5rem',
+};
+
+const DotsSizes: Record<Sizes, string> = {
   /**
    * Equivalent to 0.5 pixels
    */
-  half = '0.03125rem',
+  [Sizes.xs]: '0.03125rem',
 
   /**
    * Equivalent to 1.0 pixels
    */
-  one = '0.0625rem',
+  [Sizes.sm]: '0.0625rem',
 
   /**
    * Equivalent to 1.5 pixels
    */
-  oneAndHalf = '0.09375rem',
+  [Sizes.base]: '0.09375rem',
 
   /**
    * Equivalent to 2.0 pixels
    */
-  two = '0.125rem',
+  [Sizes.lg]: '0.125rem',
 
   /**
    * Equivalent to 2.5 pixels
    */
-  twoAndHalf = '0.15625rem',
+  [Sizes.xl]: '0.15625rem',
 
   /**
    * Equivalent to 3.0 pixels
    */
-  three = '0.1875rem',
+  [Sizes['2xl']]: '0.1875rem',
 
   /**
    * Equivalent to 3.5 pixels
    */
-  threeAndHalf = '0.21875rem',
+  [Sizes['3xl']]: '0.21875rem',
 
   /**
    * Equivalent to 4.0 pixels
    */
-  four = '0.25rem',
+  [Sizes['4xl']]: '0.25rem',
+};
+
+enum Color {
+  primary50 = 'primary50',
+  primary100 = 'primary100',
+  primary200 = 'primary200',
+  primary300 = 'primary300',
+  primary400 = 'primary400',
+  primary500 = 'primary500',
+  primary600 = 'primary600',
+  primary700 = 'primary700',
+  primary800 = 'primary800',
+  primary900 = 'primary900',
+  primary950 = 'primary950',
+  secondary50 = 'secondary50',
+  secondary100 = 'secondary100',
+  secondary200 = 'secondary200',
+  secondary300 = 'secondary300',
+  secondary400 = 'secondary400',
+  secondary500 = 'secondary500',
+  secondary600 = 'secondary600',
+  secondary700 = 'secondary700',
+  secondary800 = 'secondary800',
+  secondary900 = 'secondary900',
+  secondary950 = 'secondary950',
+  neutral50 = 'neutral50',
+  neutral100 = 'neutral100',
+  neutral200 = 'neutral200',
+  neutral300 = 'neutral300',
+  neutral400 = 'neutral400',
+  neutral500 = 'neutral500',
+  neutral600 = 'neutral600',
+  neutral700 = 'neutral700',
+  neutral800 = 'neutral800',
+  neutral900 = 'neutral900',
+  neutral950 = 'neutral950',
 }
 
-/**
- * Props for the DotBackground component.
- */
-interface DotBackgroundProps {
+const DotsColors: Record<Color, string> = {
+  [Color.primary50]: '#feffAD',
+  [Color.primary100]: '#fdff70',
+  [Color.primary200]: '#faff00',
+  [Color.primary300]: '#fae200',
+  [Color.primary400]: '#f4c200',
+  [Color.primary500]: '#efa200',
+  [Color.primary600]: '#ea8400',
+  [Color.primary700]: '#df6500',
+  [Color.primary800]: '#d54800',
+  [Color.primary900]: '#ca2e00',
+  [Color.primary950]: '#8F2100',
+  [Color.secondary50]: '#ECEDFD',
+  [Color.secondary100]: '#C7C8FA',
+  [Color.secondary200]: '#A1A3F7',
+  [Color.secondary300]: '#7C7EF4',
+  [Color.secondary400]: '#6366F1',
+  [Color.secondary500]: '#4346EF',
+  [Color.secondary600]: '#1E21EB',
+  [Color.secondary700]: '#1215CE',
+  [Color.secondary800]: '#0F11A9',
+  [Color.secondary900]: '#0B0D83',
+  [Color.secondary950]: '#080A5E',
+  [Color.neutral50]: '#fafafa',
+  [Color.neutral100]: '#f5f5f5',
+  [Color.neutral200]: '#e5e5e5',
+  [Color.neutral300]: '#d4d4d4',
+  [Color.neutral400]: '#a3a3a3',
+  [Color.neutral500]: '#737373',
+  [Color.neutral600]: '#525252',
+  [Color.neutral700]: '#404040',
+  [Color.neutral800]: '#262626',
+  [Color.neutral900]: '#171717',
+  [Color.neutral950]: '#0a0a0a',
+};
+
+interface DottedBackgroundProps {
+  /**
+   * The CSS class to apply to the component.
+   */
+  className?: string;
   /**
    * The separation between dots.
-   * Use DotsSeparation enum for valid values.
    */
-  dotsSeparation?: DotsSeparation;
+  dotsSeparation?: Sizes;
 
   /**
    * The color of the dots.
-   * Use DotColors enum for valid values.
    */
-  dotsColors?: DotColors;
+  dotsColors?: Color;
 
   /**
-   * The transparency of the radial mask.
-   * Higher the % less transparency you will get.
-   * Use RadialTransparency enum for valid values.
+   * The transparency from the edge to the center.
    */
-  radialTransparency?: RadialTransparency;
+  radialTransparency?: number;
 
   /**
    *The range of sizes for the dots.
-   *Use DotsSizeRange enum for valid values.
    */
-  dotsSize?: DotsSizes;
+  dotsSize?: Sizes;
 }
 
-/**
- * A component that displays a dot background with a radial mask.
- */
-export const DottedBackground: React.FC<DotBackgroundProps> = ({
-  dotsSeparation = DotsSeparation.fifteen,
-  dotsColors = DotColors.gray20,
-  radialTransparency = RadialTransparency.sixty,
-  dotsSize = DotsSizes.one,
-}) => {
-  /**
-   * The CSS styles for the component.
-   */
-  const styles: CSSProperties = {
-    backgroundImage: `radial-gradient(circle, ${dotsColors} ${dotsSize}, ${dotsColors} ${dotsSize}, transparent ${dotsSize})`,
-    backgroundSize: dotsSeparation,
-    maskImage: `radial-gradient(rgb(0, 0, 0), transparent ${radialTransparency})`,
+export const DottedBackground = ({
+  className,
+  dotsSeparation = Sizes.lg,
+  dotsColors = Color.neutral700,
+  radialTransparency = 50,
+  dotsSize = Sizes.base,
+}: DottedBackgroundProps) => {
+  const classes = cn(
+    className,
+    'dotted-background bg-repeat',
+    'absolute inset-0 z-0',
+    'h-full w-full ',
+  );
+
+  const cssCustomProps: Record<string, string> = {
+    '--dots-colors': `${DotsColors[dotsColors]}`,
+    '--dots-size': `${DotsSizes[dotsSize]}`,
+    '--dots-separation': DotsSeparations[dotsSeparation],
+    '--radial-transparency': `${radialTransparency}%`,
   };
 
-  /**
-   * Renders the DotBackground component.
-   */
-  return <div className="absolute inset-0 z-0 h-full w-full bg-repeat" style={styles} />;
+  return <div className={classes} style={cssCustomProps} />;
 };
 
 /** NOTE:
  * The style attribute is used here because Tailwind classes alone cannot
  * achieve the specific styles required by the DotBackground component.
  *
- * Using the style attribute allows us to define custom CSS styles that will
+ * Using the style attribute allows us to CSS Custom Properties that will
  * only apply to this specific component. This is preferable to extending the
- *
  * Tailwind config, which would apply the styles globally to all elements that
  * use those classes.
  */

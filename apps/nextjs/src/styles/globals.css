@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* class define for the usage of DottedBackground Component */
+.dotted-background {
+  background-image: radial-gradient(
+    circle,
+    var(--dots-colors) var(--dots-size),
+    var(--dots-colors) var(--dots-size),
+    transparent var(--dots-size)
+  );
+  background-size: var(--dots-separation);
+  mask-image: radial-gradient(rgb(0, 0, 0), transparent var(--radial-transparency));
+}
