@@ -1,93 +1,183 @@
-export enum TextSizeClasses {
-  xs = 'text-xs font-semibold',
-  sm = 'text-sm font-semibold',
-  base = 'text-lg font-bold',
-  xl = 'text-3xl font-bold',
+import React, { type ReactElement, type ReactNode } from 'react';
+import cn from 'classnames';
+
+export enum TextSize {
+  xs = 'xs',
+  sm = 'sm',
+  base = 'base',
+  lg = 'lg',
+  xl = 'xl',
+  '2xl' = '2xl',
+  '3xl' = '3xl',
+  '4xl' = '4xl',
+  '5xl' = '5xl',
+  '6xl' = '6xl',
+  '7xl' = '7xl',
+  '8xl' = '8xl',
+  '9xl' = '9xl',
+}
+
+const TextSizes: Record<TextSize, string> = {
+  [TextSize.xs]: 'text-xs ',
+  [TextSize.sm]: 'text-xs ',
+  [TextSize.base]: 'text-md ',
+  [TextSize.lg]: 'text-lg ',
+  [TextSize.xl]: 'text-xl ',
+  [TextSize['2xl']]: 'text-2xl ',
+  [TextSize['3xl']]: 'text-3xl ',
+  [TextSize['4xl']]: 'text-4xl ',
+  [TextSize['5xl']]: 'text-5xl ',
+  [TextSize['6xl']]: 'text-6xl ',
+  [TextSize['7xl']]: 'text-7xl ',
+  [TextSize['8xl']]: 'text-8xl ',
+  [TextSize['9xl']]: 'text-9xl ',
+};
+
+export enum FontWeight {
+  thin = 'thin',
+  extralight = 'extralight',
+  light = 'light',
+  base = 'base',
+  medium = 'medium',
+  semibold = 'semibold',
+  bold = 'bold',
+  extrabold = 'extrabold',
+  black = 'black',
+}
+
+const FontWeights: Record<FontWeight, string> = {
+  [FontWeight.thin]: 'font-thin',
+  [FontWeight.extralight]: 'font-extralight',
+  [FontWeight.light]: 'font-light',
+  [FontWeight.base]: 'font-normal',
+  [FontWeight.medium]: 'font-medium',
+  [FontWeight.semibold]: 'font-semibold',
+  [FontWeight.bold]: 'font-bold',
+  [FontWeight.extrabold]: 'font-extrabold',
+  [FontWeight.black]: 'font-black',
+};
+
+export enum Variant {
+  primary = 'primary',
+  secondary = 'secondary',
+  tertiary = 'tertiary',
 }
 
 // TODO: need to update to-pink-500 for the accent color
-export enum TextVariants {
-  primary = 'from-[#efa200] to-pink-500',
-  secondary = 'from-green-500 to-indigo-400',
-  tertiary = 'from-red-500 to-blue-500',
+const GradientVariant: Record<Variant, string> = {
+  [Variant.primary]: 'from-[#efa200] to-pink-500',
+  [Variant.secondary]: 'from-green-500 to-indigo-400',
+  [Variant.tertiary]: 'from-red-500 to-blue-500',
+};
+
+export enum GradientDirection {
+  leftToRight = 'leftToRight',
+  rightToLeft = 'rightToLeft',
+  topToBottom = 'topToBottom',
+  bottomToTop = 'bottomToTop',
+  topLeftToBottomRight = 'topLeftToBottomRight',
+  bottomRightToTopLeft = 'bottomRightToTopLeft',
+  topRightToBottomLeft = 'topRightToBottomLeft',
+  bottomLeftToTopRight = 'bottomLeftToTopRight',
 }
 
-export enum HtmlTags {
-  headingOne = 'h1',
-  headingTwo = 'h2',
-  headingThree = 'h3',
-  headingFour = 'h4',
-  headingFive = 'h5',
-  headingSix = 'h6',
-  span = 'span',
-  div = 'div',
-  paragraph = 'p',
-}
-
-export enum GradientDirections {
-  leftToRight = 'bg-gradient-to-r',
-  rightToLeft = 'bg-gradient-to-l',
-  topToBottom = 'bg-gradient-to-b',
-  bottomToTop = 'bg-gradient-to-t',
-  topLeftToBottomRight = 'bg-gradient-to-br',
-  bottomRightToTopLeft = 'bg-gradient-to-tl',
-  topRightToBottomLeft = 'bg-gradient-to-bl',
-  bottomLeftToTopRight = 'bg-gradient-to-tr',
-}
+const GradientDirections: Record<GradientDirection, string> = {
+  [GradientDirection.leftToRight]: 'bg-gradient-to-r',
+  [GradientDirection.rightToLeft]: 'bg-gradient-to-l',
+  [GradientDirection.topToBottom]: 'bg-gradient-to-b',
+  [GradientDirection.bottomToTop]: 'bg-gradient-to-t',
+  [GradientDirection.topLeftToBottomRight]: 'bg-gradient-to-br',
+  [GradientDirection.bottomRightToTopLeft]: 'bg-gradient-to-tl',
+  [GradientDirection.topRightToBottomLeft]: 'bg-gradient-to-bl',
+  [GradientDirection.bottomLeftToTopRight]: 'bg-gradient-to-tr',
+};
 
 /**
  * Props for the TextGradient component.
  */
 interface TextGradientProps {
   /**
-   * The variant of the text gradient. Determines the colors of the gradient.
+   * The CSS class to apply to the component.
    */
-  textVariant?: TextVariants;
+  className?: string;
 
   /**
-   * The HTML tag to use for the component.
+   * The children to be rendered inside the component.
    */
-  htmlTag?: HtmlTags;
+  children?: ReactNode;
 
   /**
-   * The direction of the gradient. Determines the direction of the gradient colors.
+   * The direction of the gradient.
    */
-  gradientDirection?: GradientDirections;
+  gradientDirection?: GradientDirection;
 
   /**
-   * The size of the text. Determines the font size and weight.
+   * The variant of the text gradient.
    */
-  textSizeClass?: TextSizeClasses;
+  gradientVariant?: Variant;
 
   /**
-   * The inner text to display in the component.
+   * The weight of the font/
    */
-  text: string;
+  fontWeight?: FontWeight;
+
+  /**
+   * The size of the text.
+   */
+  textSize?: TextSize;
 }
 
-export const TextGradient: React.FC<TextGradientProps> = ({
-  textVariant = TextVariants.primary,
-  htmlTag: HtmlTag = HtmlTags.headingOne,
-  gradientDirection = GradientDirections.bottomLeftToTopRight,
-  textSizeClass = TextSizeClasses.xl,
-  text,
-}) => {
-  /**
-   * Default properties for the text gradient.
-   * This includes the background clip and transparent text properties
-   */
-  const defaultProperties = 'bg-clip-text text-transparent';
+export const TextGradient = ({
+  className,
+  children,
+  fontWeight = FontWeight.bold,
+  gradientVariant = Variant.primary,
+  gradientDirection = GradientDirection.leftToRight,
+  textSize = TextSize['4xl'],
+}: TextGradientProps) => {
+  const classes = cn(
+    className,
+    'bg-clip-text text-transparent',
+    FontWeights[fontWeight],
+    GradientVariant[gradientVariant],
+    GradientDirections[gradientDirection],
+    TextSizes[textSize],
+  );
 
   return (
-    <HtmlTag
-      className={`
-      ${defaultProperties}
-      ${gradientDirection}
-      ${textVariant}
-      ${textSizeClass}
-      `}
-    >
-      {text}
-    </HtmlTag>
+    <>
+      {React.Children.map(children, (child: ReactNode) => {
+        /**
+         * Check if the child is a valid React element
+         */
+        if (React.isValidElement<ReactElement>(child)) {
+          /**
+           * Check if the child is a valid React element
+           * `TextGradientProps` type
+           */
+          if (React.isValidElement<ReactElement<TextGradientProps>>(child)) {
+            /**
+             * Check if the child is a valid React
+             * element `TextGradientProps` type
+             */
+            const childElement = child as ReactElement<TextGradientProps>;
+            /**
+             * Return a cloned element with the added `classes` prop
+             */
+
+            return React.cloneElement(childElement, {
+              /**
+               * Concatenate the `classes` prop passed to the component with
+               * the `className` prop of the child element, or an empty string
+               * if the child element doesn't have a `className` prop
+               */
+
+              className: `${classes} ${childElement.props.className || ''}`,
+            });
+          }
+        }
+        return child;
+      })}
+    </>
   );
 };
