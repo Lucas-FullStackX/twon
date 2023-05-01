@@ -6,8 +6,8 @@
 .dotted-background {
   background-image: radial-gradient(
     circle,
-    var(--dots-colors) var(--dots-size),
-    var(--dots-colors) var(--dots-size),
+    var(--tw-gradient-stops) var(--dots-size),
+    var(--tw-gradient-stops) var(--dots-size),
     transparent var(--dots-size),
     transparent 100%
   );
