@@ -8,8 +8,10 @@
     circle,
     var(--dots-colors) var(--dots-size),
     var(--dots-colors) var(--dots-size),
-    transparent var(--dots-size)
+    transparent var(--dots-size),
+    transparent 100%
   );
+
   background-size: var(--dots-separation);
   mask-image: radial-gradient(rgb(0, 0, 0), transparent var(--radial-transparency));
 }
