@@ -92,9 +92,6 @@ const GradientDirections: Record<GradientDirection, string> = {
   [GradientDirection.bottomLeftToTopRight]: 'bg-gradient-to-tr',
 };
 
-/**
- * Props for the TextGradient component.
- */
 interface TextGradientProps {
   /**
    * The CSS class to apply to the component.
