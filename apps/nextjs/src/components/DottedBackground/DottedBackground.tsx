@@ -1,7 +1,38 @@
 import cn from 'classnames';
 import type colors from 'tailwindcss/colors';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../../../tailwind.config';
 
-type TailwindColor = keyof typeof colors;
+/**
+ * Get the full Tailwind config by resolving
+ * it from the tailwind.config.js file
+ */
+const fullConfig = resolveConfig(tailwindConfig);
+
+/**
+ * Get the default and extended colors from the Tailwind config
+ */
+type defaultColors = keyof typeof colors;
+type extendedColors = typeof fullConfig.theme extends { extend: { colors: infer C } }
+  ? keyof C
+  : never;
+type AllColors = defaultColors | extendedColors;
+
+/**
+ * Exclude shades of certain colors
+ */
+type ExcludeShades<T extends string> = T extends
+  | 'black'
+  | 'white'
+  | 'current'
+  | 'inherit'
+  | 'transparent'
+  ? T
+  : `${T}-${TailwindColorShade}`;
+
+/**
+ * Define the available shades for a Tailwind color
+ */
 type TailwindColorShade =
   | '50'
   | '100'
@@ -12,9 +43,15 @@ type TailwindColorShade =
   | '600'
   | '700'
   | '800'
-  | '900';
+  | '900'
+  | '950';
 
-type TailwindColorString = `from-${TailwindColor}-${TailwindColorShade}`;
+/**
+ * Get the available Tailwind colors and
+ * generate a string type for each color with the available shades
+ */
+type TailwindColor = Exclude<AllColors, 'theme' | 'presets' | 'content'>;
+type TailwindColorString = `from-${ExcludeShades<TailwindColor>}`;
 
 export enum Sizes {
   xs = 'xs',
@@ -111,15 +148,38 @@ const DotsSizes: Record<Sizes, string> = {
   [Sizes['4xl']]: '0.25rem',
 };
 
+export enum MaskDirection {
+  leftToRight = 'leftToRight',
+  rightToLeft = 'rightToLeft',
+  topToBottom = 'topToBottom',
+  bottomToTop = 'bottomToTop',
+  topLeftToBottomRight = 'topLeftToBottomRight',
+  bottomRightToTopLeft = 'bottomRightToTopLeft',
+  topRightToBottomLeft = 'topRightToBottomLeft',
+  bottomLeftToTopRight = 'bottomLeftToTopRight',
+}
+
+const MaskDirections: Record<MaskDirection, string> = {
+  [MaskDirection.leftToRight]: '90deg',
+  [MaskDirection.rightToLeft]: '270deg',
+  [MaskDirection.topToBottom]: '180deg',
+  [MaskDirection.bottomToTop]: '0deg',
+  [MaskDirection.topLeftToBottomRight]: '135deg',
+  [MaskDirection.bottomRightToTopLeft]: '-45deg',
+  [MaskDirection.topRightToBottomLeft]: '-135deg',
+  [MaskDirection.bottomLeftToTopRight]: '45deg',
+};
+
 interface DottedBackgroundProps {
   /**
    * The CSS class to apply to the component.
    */
   className?: string;
+
   /**
-   * The separation between dots.
+   * The range of sizes for the dots.
    */
-  dotsSeparation?: Sizes;
+  dotsSize?: Sizes;
 
   /**
    * The color of the dots.
@@ -127,35 +187,51 @@ interface DottedBackgroundProps {
   dotsColors?: TailwindColorString;
 
   /**
-   * The transparency from the edge to the center.
+   * The separation between dots.
    */
-  radialTransparency?: number;
+  dotsSeparation?: Sizes;
 
   /**
-   *The range of sizes for the dots.
+   * Determines whether the mask gradient is linear or radial.
    */
-  dotsSize?: Sizes;
+  isLinear?: boolean;
+
+  /**
+   * The direction of the mask gradient.
+   */
+  maskDirection?: MaskDirection;
+
+  /**
+   * The transparency from the edge to the center in radial.
+   */
+  maskTransparency?: number;
 }
 
 export const DottedBackground = ({
   className,
-  dotsSeparation = Sizes['2xl'],
-  dotsColors = 'from-fuchsia-500',
-  radialTransparency = 50,
-  dotsSize = Sizes.xl,
+  dotsSize = Sizes.base,
+  dotsColors = 'from-gray-700',
+  dotsSeparation = Sizes.base,
+  isLinear = false,
+  maskDirection = MaskDirection.topToBottom,
+  maskTransparency = 80,
 }: DottedBackgroundProps) => {
   const classes = cn(
     className,
     'dotted-background bg-repeat',
     'absolute inset-0 z-0',
-    'h-full w-full',
+    'h-full w-full ',
     dotsColors,
   );
 
   const cssCustomProps: Record<string, string> = {
     '--dots-size': `${DotsSizes[dotsSize]}`,
     '--dots-separation': DotsSeparations[dotsSeparation],
-    '--radial-transparency': `${radialTransparency}%`,
+    '--mask-transparency': `${maskTransparency}%`,
+    '--position': MaskDirections[maskDirection],
+    '--mask-image': isLinear
+      ? 'linear-gradient(var(--position), rgb(0, 0, 0), transparent var(--mask-transparency))'
+      : 'radial-gradient(rgb(0, 0, 0), transparent var(--mask-transparency))',
   };
 
   return <div className={classes} style={cssCustomProps} />;

@@ -13,5 +13,5 @@
   );
 
   background-size: var(--dots-separation);
-  mask-image: radial-gradient(rgb(0, 0, 0), transparent var(--radial-transparency));
+  mask-image: var(--mask-image);
 }
