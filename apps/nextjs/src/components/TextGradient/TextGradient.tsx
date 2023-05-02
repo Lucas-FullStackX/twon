@@ -227,7 +227,7 @@ export const TextGradient = ({
 }: TextGradientProps) => {
   const classes = cn(
     className,
-    'bg-clip-text text-transparent',
+    'bg-clip-text text-transparent pb-2',
     GradientDirections[gradientDirection],
     gradientStartColor,
     gradientViaColors,
