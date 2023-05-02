@@ -132,6 +132,29 @@ const GradientDirections: Record<GradientDirection, string> = {
   [GradientDirection.bottomLeftToTopRight]: 'bg-gradient-to-tr',
 };
 
+type Percentages =
+  | '0%'
+  | '5%'
+  | '10%'
+  | '15%'
+  | '20%'
+  | '25%'
+  | '30%'
+  | '35%'
+  | '40%'
+  | '45%'
+  | '50%'
+  | '55%'
+  | '60%'
+  | '65%'
+  | '70%'
+  | '75%'
+  | '80%'
+  | '85%'
+  | '90%'
+  | '95%'
+  | '100%';
+
 interface TextGradientProps {
   /**
    * The CSS class to apply to the component.
@@ -172,6 +195,21 @@ interface TextGradientProps {
    * The size of the text.
    */
   textSize?: TextSize;
+
+  /**
+   * The position of the starting color stop.
+   */
+  startColorStop?: `from-${Percentages}`;
+
+  /**
+   * The position of the via color stop.
+   */
+  viaColorStop?: `via-${Percentages}`;
+
+  /**
+   * The position of the ending color stop.
+   */
+  endColorStop?: `to-${Percentages}`;
 }
 
 export const TextGradient = ({
@@ -183,6 +221,9 @@ export const TextGradient = ({
   gradientEndColor,
   fontWeight = FontWeight.base,
   textSize = TextSize['4xl'],
+  startColorStop,
+  viaColorStop,
+  endColorStop,
 }: TextGradientProps) => {
   const classes = cn(
     className,
@@ -193,6 +234,9 @@ export const TextGradient = ({
     gradientEndColor,
     FontWeights[fontWeight],
     TextSizes[textSize],
+    startColorStop,
+    viaColorStop,
+    endColorStop,
   );
 
   return (
