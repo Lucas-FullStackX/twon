@@ -1,5 +1,58 @@
 import React, { type ReactElement, type ReactNode } from 'react';
 import cn from 'classnames';
+import type colors from 'tailwindcss/colors';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../../../tailwind.config';
+
+/**
+ * Get the full Tailwind config by resolving
+ * it from the tailwind.config.js file
+ */
+const fullConfig = resolveConfig(tailwindConfig);
+
+/**
+ * Get the default and extended colors from the Tailwind config
+ */
+type defaultColors = keyof typeof colors;
+type extendedColors = typeof fullConfig.theme extends { extend: { colors: infer C } }
+  ? keyof C
+  : never;
+type AllColors = defaultColors | extendedColors;
+
+/**
+ * Exclude shades of certain colors
+ */
+type ExcludeShades<T extends string> = T extends
+  | 'black'
+  | 'white'
+  | 'current'
+  | 'inherit'
+  | 'transparent'
+  ? T
+  : `${T}-${TailwindColorShade}`;
+
+/**
+ * Define the available shades for a Tailwind color
+ */
+type TailwindColorShade =
+  | '50'
+  | '100'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '800'
+  | '900'
+  | '950';
+
+/**
+ * Get the available Tailwind colors and
+ * generate a string type for each color with the available shades
+ */
+type TailwindColor = Exclude<AllColors, 'theme' | 'presets' | 'content'>;
+type TailwindColorString = `${ExcludeShades<TailwindColor>}`;
 
 export enum TextSize {
   xs = 'xs',
@@ -57,19 +110,6 @@ const FontWeights: Record<FontWeight, string> = {
   [FontWeight.black]: 'font-black',
 };
 
-export enum Variant {
-  primary = 'primary',
-  secondary = 'secondary',
-  tertiary = 'tertiary',
-}
-
-// TODO: need to update to-pink-500 for the accent color
-const GradientVariant: Record<Variant, string> = {
-  [Variant.primary]: 'from-[#efa200] to-pink-500',
-  [Variant.secondary]: 'from-green-500 to-indigo-400',
-  [Variant.tertiary]: 'from-red-500 to-blue-500',
-};
-
 export enum GradientDirection {
   leftToRight = 'leftToRight',
   rightToLeft = 'rightToLeft',
@@ -109,12 +149,22 @@ interface TextGradientProps {
   gradientDirection?: GradientDirection;
 
   /**
-   * The variant of the text gradient.
+   * The starting color of the gradient.
    */
-  gradientVariant?: Variant;
+  gradientStartColor: `from-${TailwindColorString}`;
 
   /**
-   * The weight of the font/
+   * The colors that will be in the middle of Start and End colors.
+   */
+  gradientViaColors?: `via-${TailwindColorString}`;
+
+  /**
+   * The ending color of the gradient.
+   */
+  gradientEndColor?: `to-${TailwindColorString}`;
+
+  /**
+   * The weight of the font.
    */
   fontWeight?: FontWeight;
 
@@ -127,17 +177,21 @@ interface TextGradientProps {
 export const TextGradient = ({
   className,
   children,
-  fontWeight = FontWeight.bold,
-  gradientVariant = Variant.primary,
   gradientDirection = GradientDirection.leftToRight,
+  gradientStartColor = 'from-pink-800',
+  gradientViaColors,
+  gradientEndColor,
+  fontWeight = FontWeight.base,
   textSize = TextSize['4xl'],
 }: TextGradientProps) => {
   const classes = cn(
     className,
     'bg-clip-text text-transparent',
-    FontWeights[fontWeight],
-    GradientVariant[gradientVariant],
     GradientDirections[gradientDirection],
+    gradientStartColor,
+    gradientViaColors,
+    gradientEndColor,
+    FontWeights[fontWeight],
     TextSizes[textSize],
   );
 
@@ -152,12 +206,12 @@ export const TextGradient = ({
            * Check if the child is a valid React element
            * `TextGradientProps` type
            */
-          if (React.isValidElement<ReactElement<TextGradientProps>>(child)) {
+          if (React.isValidElement<ReactElement>(child)) {
             /**
              * Check if the child is a valid React
              * element `TextGradientProps` type
              */
-            const childElement = child as ReactElement<TextGradientProps>;
+            const childElement = child as ReactElement;
             /**
              * Return a cloned element with the added `classes` prop
              */
