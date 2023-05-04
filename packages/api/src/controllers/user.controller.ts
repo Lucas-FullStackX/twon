@@ -1,7 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { i18n } from '@acme/i18n';
 import { PrismaErrorCode, Response, TRPCErrorCode, type Ctx, type Params } from '../common';
 import type {
   CreateUserInputType,
@@ -85,7 +84,7 @@ export const createUserHandler = async ({ ctx, input }: Params<CreateUserInputTy
     // Prisma error (Database issue)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === PrismaErrorCode.UniqueConstraintViolation) {
-        const message = i18n.t('api:user.create.error.userAlreadyExists');
+        const message = 'api:user.create.error.userAlreadyExists';
         throw new TRPCError({
           code: TRPCErrorCode.CONFLICT,
           message,
@@ -95,7 +94,7 @@ export const createUserHandler = async ({ ctx, input }: Params<CreateUserInputTy
 
     // Zod error (Invalid input)
     if (error instanceof z.ZodError) {
-      const message = i18n.t('api:user.create.error.invalidInput');
+      const message = 'api:user.create.error.invalidInput';
       throw new TRPCError({
         code: TRPCErrorCode.BAD_REQUEST,
         message,
@@ -105,7 +104,7 @@ export const createUserHandler = async ({ ctx, input }: Params<CreateUserInputTy
     // TRPC error (Custom error)
     if (error instanceof TRPCError) {
       if (error.code === TRPCErrorCode.UNAUTHORIZED) {
-        const message = i18n.t('common:message.error.unauthorized');
+        const message = 'common:message.error.unauthorized';
         throw new TRPCError({
           code: TRPCErrorCode.UNAUTHORIZED,
           message,
