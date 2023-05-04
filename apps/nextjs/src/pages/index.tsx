@@ -1,13 +1,19 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { Button, ButtonSize, ButtonVariant, TextInput } from 'side-ui';
-import { Icon, IconCatalog } from '~/components';
+import {
+  Card,
+  DottedBackground,
+  Icon,
+  IconCatalog,
+  Sizes,
+  TextGradient,
+  Typewriter,
+} from '~/components';
 
 const Home: NextPage = () => {
-  const { data: sessionData } = useSession();
-
   return (
     <>
       <Head>
@@ -15,37 +21,54 @@ const Home: NextPage = () => {
         <meta name="description" content="Side Project Starter Kit" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="relative flex h-screen w-full flex-none flex-col items-center justify-center gap-10 overflow-hidden p-10">
-        <div className="relative flex h-min w-min flex-none flex-col flex-wrap items-center justify-center gap-4 overflow-hidden p-0">
-          <div className="mb-2 flex flex-row items-center gap-4 text-white">
-            <a
-              className="text-2xl font-semibold text-secondary-300 transition hover:opacity-80"
-              href="/"
-            >
-              Side Project Starter Kit
-            </a>
-          </div>
-          <div className="mb-4 w-96">
-            <h1 className="text-center text-3xl font-bold text-slate-50">nextjs:home.pov</h1>
-          </div>
-          {sessionData ? (
-            <p className="text-lg text-white">{sessionData.user.name}</p>
-          ) : (
-            <div className="flex items-center space-x-3">
-              <TextInput className="w-64" placeholder="Escribe tu email" />
-              <Button
-                size={ButtonSize.sm}
-                variant={ButtonVariant.primary}
-                onClick={() => signIn('discord')}
-              >
-                Log In con Discord
-              </Button>
-            </div>
-          )}
-        </div>
 
-        {/* Footer options */}
-        <div className="flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
+      <main className="relative flex h-full w-full flex-none flex-col items-center justify-between gap-16  overflow-hidden bg-black p-10 ">
+        <section className=" animate-fade-in  z-10 flex flex-col items-center gap-12 text-white opacity-0 ">
+          <div className="LOGO h-16 w-16 rounded-full bg-white"></div>
+          <TextGradient gradientStartColor="from-[#e8b066]" gradientEndColor="to-[#df12ff]">
+            <h1 className="text-shadow-glow text-fluid-base z-10 whitespace-nowrap text-center font-bold leading-tight">
+              Unleash Your <br /> Tweeting Potencial
+            </h1>
+          </TextGradient>
+
+          <div className="flex items-center space-x-3 ">
+            <TextInput className="w-64 bg-slate-950" placeholder="Escribe tu email" />
+            <Button
+              size={ButtonSize.sm}
+              variant={ButtonVariant.primary}
+              onClick={() => signIn('discord')}
+            >
+              Log In con Discord
+            </Button>
+          </div>
+        </section>
+
+        <section className="z-10 grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-2">
+          <Card className="animation-delay-500 opacity-0 lg:max-h-[200px]">
+            <p>
+              Do you want to charge more than $7/month for your product? You can try offering a
+              one-time payment for life, show it to new users, and measure the results... I bet it
+              will work.
+            </p>
+          </Card>
+          <Card
+            className="animation-delay-1000 opacity-0 md:min-h-[400px] lg:min-h-[300px]"
+            endComments={30}
+            endHeart={50}
+            endRetweet={20}
+            endViews={300}
+          >
+            <Typewriter
+              text={`Charging under $7/month for your product? 🤔
+
+              Consider this: Shift to a single payment and provide lifetime access, a year of updates, or one-time use. Show it exclusively to new users as an experiment.
+
+              My guess: conversion rates and lifetime value will soar! 💸`}
+            />
+          </Card>
+        </section>
+
+        <div className="z-10 flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
           <Link
             className="group relative isolate flex flex-none items-center gap-x-3 rounded-lg px-2 py-0.5 font-medium text-white/30 transition-colors hover:text-primary-200"
             href="https://discord.com/invite/77guznJ8mZ"
@@ -68,6 +91,19 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </div>
+        <DottedBackground
+          className="-top-40s absolute md:hidden"
+          dotsSize={Sizes.xl}
+          dotsColors="from-gray-500"
+          maskTransparency={45}
+          isLinear={true}
+        />
+        <DottedBackground
+          className="absolute -top-40 hidden md:block"
+          dotsSize={Sizes.xl}
+          dotsColors="from-gray-500"
+          maskTransparency={50}
+        />
       </main>
     </>
   );
