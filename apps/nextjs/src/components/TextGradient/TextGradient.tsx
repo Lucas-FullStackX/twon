@@ -176,17 +176,17 @@ interface TextGradientProps {
   /**
    * The starting color of the gradient.
    */
-  gradientStartColor: `from-${TailwindColorString}`;
+  gradientStartColor: `from-${TailwindColorString}` | `from-[#${string}]`;
 
   /**
    * The colors that will be in the middle of Start and End colors.
    */
-  gradientViaColors?: `via-${TailwindColorString}`;
+  gradientViaColors?: `via-${TailwindColorString}` | `via-[#${string}]`;
 
   /**
    * The ending color of the gradient.
    */
-  gradientEndColor?: `to-${TailwindColorString}`;
+  gradientEndColor?: `to-${TailwindColorString}` | `to-[#${string}]`;
 
   /**
    * The weight of the font.
