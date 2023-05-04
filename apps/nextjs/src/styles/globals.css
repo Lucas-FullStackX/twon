@@ -65,3 +65,4 @@ select:-webkit-autofill:focus {
 
   background-size: var(--dots-separation);
   mask-image: var(--mask-image);
+}
