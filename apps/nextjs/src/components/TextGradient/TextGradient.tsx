@@ -132,6 +132,8 @@ const GradientDirections: Record<GradientDirection, string> = {
   [GradientDirection.bottomLeftToTopRight]: 'bg-gradient-to-tr',
 };
 
+// TODO: Consider finding a better solution for the Percentages type as manually listing every percentage value is not ideal.
+
 type Percentages =
   | '0%'
   | '5%'
