@@ -1,4 +1,4 @@
-import React, { type ReactElement, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import cn from 'classnames';
 import type colors from 'tailwindcss/colors';
 import resolveConfig from 'tailwindcss/resolveConfig';
@@ -239,40 +239,5 @@ export const TextGradient = ({
     endColorStop,
   );
 
-  return (
-    <>
-      {React.Children.map(children, (child: ReactNode) => {
-        /**
-         * Check if the child is a valid React element
-         */
-        if (React.isValidElement<ReactElement>(child)) {
-          /**
-           * Check if the child is a valid React element
-           * `TextGradientProps` type
-           */
-          if (React.isValidElement<ReactElement>(child)) {
-            /**
-             * Check if the child is a valid React
-             * element `TextGradientProps` type
-             */
-            const childElement = child as ReactElement;
-            /**
-             * Return a cloned element with the added `classes` prop
-             */
-
-            return React.cloneElement(childElement, {
-              /**
-               * Concatenate the `classes` prop passed to the component with
-               * the `className` prop of the child element, or an empty string
-               * if the child element doesn't have a `className` prop
-               */
-
-              className: `${classes} ${childElement.props.className || ''}`,
-            });
-          }
-        }
-        return child;
-      })}
-    </>
-  );
+  return <div className={classes}>{children}</div>;
 };
