@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import cn from 'classnames';
 
 interface TypewriterProps {
   /**
@@ -15,12 +14,8 @@ interface TypewriterProps {
 export const Typewriter = ({ text, speed = 15 }: TypewriterProps) => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const classes = cn('whitespace-pre-line');
 
   useEffect(() => {
-    /**
-     * Check if we've typed out all the characters
-     */
     if (currentIndex < text.length) {
       /**
        * Use a setInterval to add each character
@@ -31,12 +26,9 @@ export const Typewriter = ({ text, speed = 15 }: TypewriterProps) => {
         setCurrentIndex(currentIndex + 1);
       }, speed);
 
-      /**
-       * Clean up the interval when the effect is cleaned up
-       */
       return () => clearInterval(intervalId);
     }
   }, [currentIndex, currentText, text, speed]);
 
-  return <p className={classes}>{currentText}</p>;
+  return <p className="whitespace-pre-line">{currentText}</p>;
 };
