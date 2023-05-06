@@ -71,9 +71,12 @@ select:-webkit-autofill:focus {
 /*                 UTILITY CLASSES              */
 /************************************************/
 
-.animation-delay-500 {
-  animation-delay: 500ms;
-}
-.animation-delay-1000 {
-  animation-delay: 1000ms;
+@layer utilities {
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
 }
