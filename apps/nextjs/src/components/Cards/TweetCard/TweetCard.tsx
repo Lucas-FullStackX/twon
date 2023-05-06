@@ -1,30 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-
-import { type ReactNode } from 'react';
+import Image from 'next/image';
 import cn from 'classnames';
-import { Counter } from '../Counter/Counter';
-import { Icon, IconCatalog } from '../Icon/Icon';
+import { Typewriter } from '~/components/Typewriter/Typewriter';
+import { Counter } from '../../Counter/Counter';
+import { Icon, IconCatalog } from '../../Icon/Icon';
 
-interface CardProps {
+export interface TweetCardProps {
   /**
-   * The number of comments at the end.
+   * The number of comments at the end of the count animation.
    */
-  endComments?: number;
-
-  /**
-   * The number of hearts at the end.
-   */
-  endHeart?: number;
-
-  /**
-   * The number of retweets at the end.
-   */
-  endRetweet?: number;
-
-  /**
-   * The number of views at the end.
-   */
-  endViews?: number;
+  commentCount?: number;
 
   /**
    * The CSS class to apply to the component.
@@ -32,19 +16,37 @@ interface CardProps {
   className?: string;
 
   /**
-   * The children of the component.
+   * The number of like at the end of the count animation.
    */
-  children: ReactNode;
+  likeCount?: number;
+
+  /**
+   * The number of retweets at the end of the count animation.
+   */
+  retweetCount?: number;
+
+  tweetText: string;
+
+  /**
+   * Whether to enable the typing animation for the tweet text.
+   */
+  isTypingAnimationEnabled?: boolean;
+
+  /**
+   * The number of views at the end of the count animation.
+   */
+  viewCount?: number;
 }
 
-export const Card = ({
-  endComments = 2,
-  endHeart = 4,
-  endRetweet = 1,
-  endViews = 10,
+export const TweetCard = ({
+  commentCount: endComments = 2,
   className,
-  children,
-}: CardProps) => {
+  likeCount: endHeart = 4,
+  retweetCount: endRetweet = 1,
+  tweetText,
+  isTypingAnimationEnabled = false,
+  viewCount: endViews = 10,
+}: TweetCardProps) => {
   const classes = {
     container: cn(
       className,
@@ -54,11 +56,11 @@ export const Card = ({
       'bg-black p-4 text-white animate-fade-in',
     ),
     profileImg: cn('hidden w-10 rounded-full', 'min-[420px]:block lg:w-16'),
-    bodyContainer: cn(
+    body: cn(
       'col-start-1 col-end-3 flex min-h-[120px] flex-col',
       'items-start gap-4 min-[420px]:col-start-2',
     ),
-    socialContainer: cn(
+    social: cn(
       'col-start-1 col-end-3 mt-4 flex w-full',
       'items-end justify-between gap-4 justify-self-end',
       'min-[400px]:col-start-2',
@@ -67,12 +69,14 @@ export const Card = ({
 
   return (
     <div className={classes.container}>
-      <img
+      <Image
         src="https://pbs.twimg.com/profile_images/1645933911514681345/zrDbFWCT_400x400.jpg"
-        alt=""
+        alt="Serudda twitter profile image"
         className={classes.profileImg}
+        width="50"
+        height="50"
       />
-      <div className={classes.bodyContainer}>
+      <div className={classes.body}>
         <div className="flex items-center gap-1">
           <h2 className="text-xl font-bold uppercase">Serudda</h2>
 
@@ -80,11 +84,11 @@ export const Card = ({
           <span className="md:text-fluid-sm text-gray-600">@serudda · Apr 28</span>
         </div>
 
-        {children}
+        {isTypingAnimationEnabled ? <Typewriter text={tweetText} /> : <p>{tweetText}</p>}
       </div>
 
       {/* Icons Section */}
-      <div className={classes.socialContainer}>
+      <div className={classes.social}>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterComments} isSolid={true} className="w-4" />
           <Counter start={1} end={endComments} />
