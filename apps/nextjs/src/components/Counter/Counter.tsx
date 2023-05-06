@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import cn from 'classnames';
 
 interface CounterProps {
   /**
@@ -19,8 +20,9 @@ interface CounterProps {
   className?: string;
 }
 
-export const Counter = ({ start, end, speed = 100 }: CounterProps) => {
+export const Counter = ({ className, start, end, speed = 100 }: CounterProps) => {
   const [count, setCount] = useState(start);
+  const classes = cn(className, 'w-8');
 
   useEffect(() => {
     setCount(start);
@@ -37,7 +39,7 @@ export const Counter = ({ start, end, speed = 100 }: CounterProps) => {
   }, [count, end, speed]);
 
   return (
-    <div className="counter min-w-[30px]">
+    <div className={classes}>
       <span>{count}</span>
     </div>
   );
