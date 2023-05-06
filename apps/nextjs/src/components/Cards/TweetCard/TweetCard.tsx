@@ -25,6 +25,9 @@ export interface TweetCardProps {
    */
   retweetCount?: number;
 
+  /**
+   * The text of the tweet to be displayed in the TweetCard component.
+   */
   tweetText: string;
 
   /**
@@ -39,10 +42,10 @@ export interface TweetCardProps {
 }
 
 export const TweetCard = ({
-  commentCount: endComments = 2,
+  commentCount = 2,
   className,
   likeCount: endHeart = 4,
-  retweetCount: endRetweet = 1,
+  retweetCount = 1,
   tweetText,
   isTypingAnimationEnabled = false,
   viewCount: endViews = 10,
@@ -91,11 +94,11 @@ export const TweetCard = ({
       <div className={classes.social}>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterComments} isSolid={true} className="w-4" />
-          <Counter start={1} end={endComments} />
+          <Counter start={1} end={commentCount} />
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterRetweet} isSolid={true} className="w-4" />
-          <Counter start={1} end={endRetweet} />
+          <Counter start={1} end={retweetCount} />
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterHeart} isSolid={true} className="w-4" />
@@ -103,7 +106,7 @@ export const TweetCard = ({
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterView} isSolid={true} className="w-4" />
-          <Counter start={1} end={endViews} />
+          <Counter start={1} end={endViews} speed={25} />
         </div>
       </div>
     </div>
