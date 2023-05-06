@@ -1,17 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
-import { Button, ButtonSize, ButtonVariant, TextInput } from 'side-ui';
-import {
-  Card,
-  DottedBackground,
-  Icon,
-  IconCatalog,
-  Sizes,
-  TextGradient,
-  Typewriter,
-} from '~/components';
+import { TextInput } from 'side-ui';
+import { DottedBackground, Icon, IconCatalog, Sizes, TextGradient, TweetCard } from '~/components';
 
 const Home: NextPage = () => {
   return (
@@ -22,8 +13,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="relative flex h-full w-full flex-none flex-col items-center justify-between gap-16  overflow-hidden bg-black p-10 ">
-        <section className=" animate-fade-in  z-10 flex flex-col items-center gap-12 text-white opacity-0 ">
+      <main className="relative flex h-full w-full flex-none flex-col items-center justify-between gap-16 overflow-hidden bg-black p-10">
+        <section className=" animate-fade-in  z-10 flex flex-col items-center gap-12 text-white opacity-0">
           <div className="LOGO h-16 w-16 rounded-full bg-white"></div>
           <TextGradient gradientStartColor="from-[#e8b066]" gradientEndColor="to-[#df12ff]">
             <h1 className="text-shadow-glow text-fluid-base z-10 whitespace-nowrap text-center font-bold leading-tight">
@@ -31,41 +22,35 @@ const Home: NextPage = () => {
             </h1>
           </TextGradient>
 
-          <div className="flex items-center space-x-3 ">
+          <div className="flex items-center space-x-3">
             <TextInput className="w-64 bg-slate-950" placeholder="Escribe tu email" />
-            <Button
-              size={ButtonSize.sm}
-              variant={ButtonVariant.primary}
-              onClick={() => signIn('discord')}
+            <Link
+              className="relative flex h-10 min-w-fit items-center justify-center overflow-hidden whitespace-nowrap rounded-md bg-primary-500 px-4 py-2 text-center text-sm font-semibold text-black transition duration-100 ease-out enabled:hover:bg-primary-300 disabled:cursor-default disabled:opacity-50"
+              href={'change'}
             >
-              Log In con Discord
-            </Button>
+              Get early access
+            </Link>
           </div>
         </section>
 
         <section className="z-10 grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-2">
-          <Card className="animation-delay-500 opacity-0 lg:max-h-[200px]">
-            <p>
-              Do you want to charge more than $7/month for your product? You can try offering a
-              one-time payment for life, show it to new users, and measure the results... I bet it
-              will work.
-            </p>
-          </Card>
-          <Card
+          <TweetCard
+            className="animation-delay-500 opacity-0 lg:max-h-[200px]"
+            tweetText="  Do you want to charge more than $7/month for your product? You can try offering aone-time payment for life, show it to new users, and measure the results... I bet it will work."
+          />
+          <TweetCard
             className="animation-delay-1000 opacity-0 md:min-h-[400px] lg:min-h-[300px]"
-            endComments={30}
-            endHeart={50}
-            endRetweet={20}
-            endViews={300}
-          >
-            <Typewriter
-              text={`Charging under $7/month for your product? 🤔
+            commentCount={30}
+            likeCount={50}
+            retweetCount={20}
+            viewCount={300}
+            isTypingAnimationEnabled={true}
+            tweetText={`Charging under $7/month for your product? 🤔
 
-              Consider this: Shift to a single payment and provide lifetime access, a year of updates, or one-time use. Show it exclusively to new users as an experiment.
+            Consider this: Shift to a single payment and provide lifetime access, a year of updates, or one-time use. Show it exclusively to new users as an experiment.
 
-              My guess: conversion rates and lifetime value will soar! 💸`}
-            />
-          </Card>
+            My guess: conversion rates and lifetime value will soar! 💸`}
+          />
         </section>
 
         <div className="z-10 flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
