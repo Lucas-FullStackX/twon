@@ -44,11 +44,11 @@ export interface TweetCardProps {
 export const TweetCard = ({
   commentCount = 2,
   className,
-  likeCount: endHeart = 4,
+  likeCount = 4,
   retweetCount = 1,
   tweetText,
   isTypingAnimationEnabled = false,
-  viewCount: endViews = 10,
+  viewCount = 10,
 }: TweetCardProps) => {
   const classes = {
     container: cn(
@@ -102,11 +102,11 @@ export const TweetCard = ({
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterHeart} isSolid={true} className="w-4" />
-          <Counter start={1} end={endHeart} />
+          <Counter start={1} end={likeCount} />
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterView} isSolid={true} className="w-4" />
-          <Counter start={1} end={endViews} speed={25} />
+          <Counter start={1} end={viewCount} speed={25} />
         </div>
       </div>
     </div>
