@@ -66,3 +66,17 @@ select:-webkit-autofill:focus {
   background-size: var(--dots-separation);
   mask-image: var(--mask-image);
 }
+
+/************************************************/
+/*                 UTILITY CLASSES              */
+/************************************************/
+
+@layer utilities {
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+}

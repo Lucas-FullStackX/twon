@@ -15,7 +15,7 @@ const config = {
   eslint: { ignoreDuringBuilds: !!process.env.CI },
   typescript: { ignoreBuildErrors: !!process.env.CI },
   images: {
-    domains: ['res.cloudinary.com', 'cdn.discordapp.com'],
+    domains: ['res.cloudinary.com', 'cdn.discordapp.com', "pbs.twimg.com"],
   },
   publicRuntimeConfig: {
     version,
