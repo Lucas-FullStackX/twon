@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Button, ButtonSize, ButtonVariant, Icon, IconCatalog, TextInput } from 'side-ui';
+import { Button, ButtonSize, Icon, IconCatalog, TextInput } from 'side-ui';
 import {
   DottedBackground,
   Logo,
@@ -15,6 +16,12 @@ import {
 } from '~/components';
 
 const Landing: NextPage = () => {
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
   return (
     <>
       <Head>
@@ -34,8 +41,15 @@ const Landing: NextPage = () => {
           </TextGradient>
 
           <div className="flex items-center space-x-3">
-            <TextInput className="w-64 bg-slate-950" placeholder="Your email" />
-            <Link href={'change'}>
+            <TextInput
+              className="w-64 bg-slate-950"
+              onChange={handleEmailChange}
+              placeholder="Your email"
+              value={email}
+            />
+            <Link
+              href={`https://magic.beehiiv.com/v1/1287b73a-7dd6-41ed-afad-1bf77fa121c8?email=${email}&redirect_to=https://twon.app&utm_source=landing&utm_medium=hero`}
+            >
               <Button size={ButtonSize.sm}>Get Early Access</Button>
             </Link>
           </div>
