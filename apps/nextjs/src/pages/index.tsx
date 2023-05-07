@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Button, ButtonSize, Icon, IconCatalog, TextInput } from 'side-ui';
 import {
   DottedBackground,
-  DottedBgMaskDirection,
   DottedBgSeparation,
   DottedBgSize,
   Logo,

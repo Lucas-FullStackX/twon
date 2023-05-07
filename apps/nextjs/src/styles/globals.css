@@ -79,8 +79,4 @@ select:-webkit-autofill:focus {
   .animation-delay-1000 {
     animation-delay: 1000ms;
   }
-
-  .shadow-box {
-    box-shadow: 0 0 50px -12px rgba(232, 121, 249, 0.7);
-  }
 }
