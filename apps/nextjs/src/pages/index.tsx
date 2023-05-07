@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { Button, ButtonSize, Icon, IconCatalog, TextInput } from 'side-ui';
 import {
   DottedBackground,
+  DottedBgMaskDirection,
+  DottedBgSeparation,
+  DottedBgSize,
   Logo,
   LogoSize,
   LogoType,
   LogoVariant,
-  Separation,
-  Size,
   TextGradient,
   TweetCard,
 } from '~/components';
@@ -103,16 +104,16 @@ const Landing: NextPage = () => {
         </div>
         <DottedBackground
           className="absolute -top-40 md:hidden"
-          dotsSize={Size.base}
+          dotsSize={DottedBgSize.base}
           dotsColors="from-slate-500"
-          dotsSeparation={Separation.sm}
+          dotsSeparation={DottedBgSeparation.sm}
           maskTransparency={90}
           isLinear={true}
         />
         <DottedBackground
           className="absolute -top-40 hidden md:block"
-          dotsSize={Size.base}
-          dotsSeparation={Separation.sm}
+          dotsSize={DottedBgSize.base}
+          dotsSeparation={DottedBgSeparation.sm}
           dotsColors="from-slate-500"
           maskTransparency={80}
         />

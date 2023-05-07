@@ -53,7 +53,7 @@ type TailwindColorShade =
 type TailwindColor = Exclude<AllColors, 'theme' | 'presets' | 'content'>;
 type TailwindColorString = `from-${ExcludeShades<TailwindColor>}`;
 
-export enum Size {
+export enum DottedBgSize {
   xs = 'xs',
   sm = 'sm',
   base = 'base',
@@ -64,18 +64,18 @@ export enum Size {
   '4xl' = '4xl',
 }
 
-const DotsSizes: Record<Size, string> = {
-  [Size.xs]: '0.03125rem',
-  [Size.sm]: '0.0625rem',
-  [Size.base]: '0.09375rem',
-  [Size.lg]: '0.125rem',
-  [Size.xl]: '0.15625rem',
-  [Size['2xl']]: '0.1875rem',
-  [Size['3xl']]: '0.21875rem',
-  [Size['4xl']]: '0.25rem',
+const DotsSizes: Record<DottedBgSize, string> = {
+  [DottedBgSize.xs]: '0.03125rem',
+  [DottedBgSize.sm]: '0.0625rem',
+  [DottedBgSize.base]: '0.09375rem',
+  [DottedBgSize.lg]: '0.125rem',
+  [DottedBgSize.xl]: '0.15625rem',
+  [DottedBgSize['2xl']]: '0.1875rem',
+  [DottedBgSize['3xl']]: '0.21875rem',
+  [DottedBgSize['4xl']]: '0.25rem',
 };
 
-export enum Separation {
+export enum DottedBgSeparation {
   xs = 'xs',
   sm = 'sm',
   base = 'base',
@@ -86,18 +86,18 @@ export enum Separation {
   '4xl' = '4xl',
 }
 
-const DotsSeparations: Record<Separation, string> = {
-  [Separation.xs]: '0.3125rem 0.3125rem',
-  [Separation.sm]: '0.625rem 0.625rem',
-  [Separation.base]: '0.9375rem 0.9375rem',
-  [Separation.lg]: '1.25rem 1.25rem',
-  [Separation.xl]: '1.5625rem 1.5625rem',
-  [Separation['2xl']]: '1.875rem 1.875rem',
-  [Separation['3xl']]: '2.1875rem 2.1875rem',
-  [Separation['4xl']]: '2.5rem 2.5rem',
+const DotsSeparations: Record<DottedBgSeparation, string> = {
+  [DottedBgSeparation.xs]: '0.3125rem 0.3125rem',
+  [DottedBgSeparation.sm]: '0.625rem 0.625rem',
+  [DottedBgSeparation.base]: '0.9375rem 0.9375rem',
+  [DottedBgSeparation.lg]: '1.25rem 1.25rem',
+  [DottedBgSeparation.xl]: '1.5625rem 1.5625rem',
+  [DottedBgSeparation['2xl']]: '1.875rem 1.875rem',
+  [DottedBgSeparation['3xl']]: '2.1875rem 2.1875rem',
+  [DottedBgSeparation['4xl']]: '2.5rem 2.5rem',
 };
 
-export enum MaskDirection {
+export enum DottedBgMaskDirection {
   leftToRight = 'leftToRight',
   rightToLeft = 'rightToLeft',
   topToBottom = 'topToBottom',
@@ -108,15 +108,15 @@ export enum MaskDirection {
   bottomLeftToTopRight = 'bottomLeftToTopRight',
 }
 
-const MaskDirections: Record<MaskDirection, string> = {
-  [MaskDirection.leftToRight]: '90deg',
-  [MaskDirection.rightToLeft]: '270deg',
-  [MaskDirection.topToBottom]: '180deg',
-  [MaskDirection.bottomToTop]: '0deg',
-  [MaskDirection.topLeftToBottomRight]: '135deg',
-  [MaskDirection.bottomRightToTopLeft]: '-45deg',
-  [MaskDirection.topRightToBottomLeft]: '-135deg',
-  [MaskDirection.bottomLeftToTopRight]: '45deg',
+const MaskDirections: Record<DottedBgMaskDirection, string> = {
+  [DottedBgMaskDirection.leftToRight]: '90deg',
+  [DottedBgMaskDirection.rightToLeft]: '270deg',
+  [DottedBgMaskDirection.topToBottom]: '180deg',
+  [DottedBgMaskDirection.bottomToTop]: '0deg',
+  [DottedBgMaskDirection.topLeftToBottomRight]: '135deg',
+  [DottedBgMaskDirection.bottomRightToTopLeft]: '-45deg',
+  [DottedBgMaskDirection.topRightToBottomLeft]: '-135deg',
+  [DottedBgMaskDirection.bottomLeftToTopRight]: '45deg',
 };
 
 interface DottedBackgroundProps {
@@ -128,7 +128,7 @@ interface DottedBackgroundProps {
   /**
    * The range of sizes for the dots.
    */
-  dotsSize?: Size;
+  dotsSize?: DottedBgSize;
 
   /**
    * The color of the dots.
@@ -138,7 +138,7 @@ interface DottedBackgroundProps {
   /**
    * The separation between dots.
    */
-  dotsSeparation?: Separation;
+  dotsSeparation?: DottedBgSeparation;
 
   /**
    * Determines whether the mask gradient is linear or radial.
@@ -148,7 +148,7 @@ interface DottedBackgroundProps {
   /**
    * The direction of the mask gradient.
    */
-  maskDirection?: MaskDirection;
+  maskDirection?: DottedBgMaskDirection;
 
   /**
    * The transparency from the edge to the center in radial.
@@ -158,11 +158,11 @@ interface DottedBackgroundProps {
 
 export const DottedBackground = ({
   className,
-  dotsSize = Size.base,
+  dotsSize = DottedBgSize.base,
   dotsColors = 'from-gray-700',
-  dotsSeparation = Separation.base,
+  dotsSeparation = DottedBgSeparation.base,
   isLinear = false,
-  maskDirection = MaskDirection.topToBottom,
+  maskDirection = DottedBgMaskDirection.topToBottom,
   maskTransparency = 80,
 }: DottedBackgroundProps) => {
   const classes = cn(
