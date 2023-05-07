@@ -1,55 +1,91 @@
-import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next';
+import { useState } from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { signIn, useSession } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Icon, IconCatalog } from '~/components';
+import { Button, ButtonSize, Icon, IconCatalog, TextInput } from 'side-ui';
+import {
+  DottedBackground,
+  DottedBgSeparation,
+  DottedBgSize,
+  Logo,
+  LogoSize,
+  LogoType,
+  LogoVariant,
+  TextGradient,
+  TweetCard,
+} from '~/components';
 
-type HomeProps = {};
+const Landing: NextPage = () => {
+  const [email, setEmail] = useState('');
 
-const Home: NextPage = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { t } = useTranslation(['nextjs']);
-  const { data: sessionData } = useSession();
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
 
   return (
     <>
       <Head>
-        <title>Indie Creators HQ - Side Project Starter Kit</title>
-        <meta name="description" content="Side Project Starter Kit" />
+        <title>Twon - Unleash your Tweeting Potencial</title>
+        <meta name="description" content="Unleash your Tweeting Potencial" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="relative flex h-screen w-full flex-none flex-col items-center justify-center gap-10 overflow-hidden bg-slate-900 p-10">
-        <div className="relative flex h-min w-min flex-none flex-col flex-wrap items-center justify-center gap-4 overflow-hidden p-0">
-          <div className="mb-2 flex flex-row items-center gap-4 text-white">
-            <a className="text-2xl font-semibold transition hover:opacity-80" href="/">
-              Side Project Starter Kit
-            </a>
-          </div>
-          <div className="mb-4 w-96">
-            <h1 className="text-center text-3xl font-bold text-slate-50">{t('nextjs:home.pov')}</h1>
-          </div>
-          {sessionData ? (
-            <p className="text-lg text-white">{sessionData.user.name}</p>
-          ) : (
-            <button
-              className="relative mb-10 flex min-w-fit items-center justify-center overflow-hidden whitespace-nowrap rounded-lg bg-[#5865f2]/60 px-4 py-3 text-center text-base font-semibold text-white transition duration-100 ease-out hover:bg-[#5865f2]/80"
-              onClick={() => signIn('discord')}
-            >
-              {t('nextjs:component.button.logInWithDiscord')}
-            </button>
-          )}
-        </div>
 
-        {/* Footer options */}
-        <div className="flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
-          <Link
-            className="hover:text-primary-200 group relative isolate flex flex-none items-center gap-x-3 rounded-lg px-2 py-0.5 font-medium text-white/30 transition-colors"
-            href="https://discord.com/invite/77guznJ8mZ"
-            target="_blank"
-          >
-            <Icon icon={IconCatalog.discord} className="h-6 w-6 text-white" isSolid />
-            <span className="self-baseline text-white">Discord</span>
+      <main className="relative flex h-full w-full flex-none flex-col items-center justify-between gap-16 overflow-hidden bg-black p-10">
+        {/* HERO SECTION */}
+        <section className=" animate-fade-in z-10 mb-4 flex flex-col items-center gap-10 text-white opacity-0">
+          <Logo variant={LogoVariant.light} size={LogoSize.md} type={LogoType.complete} />
+          <TextGradient gradientStartColor="from-[#e8b066]" gradientEndColor="to-[#df12ff]">
+            <h1 className="text-shadow-glow text-fluid-base z-10 max-w-3xl text-center font-bold leading-none">
+              Unleash your Tweeting Potencial
+            </h1>
+          </TextGradient>
+
+          <div className="flex items-center space-x-3">
+            <TextInput
+              className="w-64 bg-slate-950"
+              onChange={handleEmailChange}
+              placeholder="Your email"
+              value={email}
+            />
+            <Link
+              href={`https://magic.beehiiv.com/v1/1287b73a-7dd6-41ed-afad-1bf77fa121c8?email=${email}&redirect_to=https://twon.app&utm_source=landing&utm_medium=hero`}
+            >
+              <Button size={ButtonSize.sm}>Get Early Access</Button>
+            </Link>
+          </div>
+        </section>
+
+        {/* INPUT AND OUTPUT TWEET */}
+        <section className="z-10 grid grid-cols-1 items-start justify-center gap-10 md:grid-cols-2">
+          <div>
+            <div className="mb-2 text-xl font-medium text-slate-50">Input Tweet</div>
+            <TweetCard
+              className="animation-delay-500 opacity-0 lg:max-h-[200px]"
+              tweetText="  Do you want to charge more than $7/month for your product? You can try offering aone-time payment for life, show it to new users, and measure the results... I bet it will work."
+            />
+          </div>
+
+          <div>
+            <div className="mb-2 text-xl font-medium text-slate-50">Output Tweet</div>
+            <TweetCard
+              className="shadow-center animation-delay-1000 opacity-0 shadow-secondary-400 md:min-h-[400px] lg:min-h-[300px]"
+              commentCount={32}
+              likeCount={50}
+              retweetCount={12}
+              viewCount={3650}
+              isTypingAnimationEnabled={true}
+              tweetText={`Charging under $7/month for your product? 🤔
+
+            Consider this: Shift to a single payment and provide lifetime access, a year of updates, or one-time use. Show it exclusively to new users as an experiment.
+
+            My guess: conversion rates and lifetime value will soar! 💸`}
+            />
+          </div>
+        </section>
+
+        <div className="z-10 flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
+          <Link href="https://github.com/serudda/twon" target="_blank">
+            <Icon icon={IconCatalog.gitHub} className="h-6 w-6 text-white" isSolid />
           </Link>
           <div className="mx-2 h-[30px] w-[0.5px] rotate-[20deg] transform bg-neutral-700"></div>
           <div className="flex items-center gap-x-1">
@@ -57,7 +93,7 @@ const Home: NextPage = (_props: InferGetServerSidePropsType<typeof getServerSide
             <Icon icon={IconCatalog.heart} className="h-4 w-4 text-red-500" isSolid />
             <span className="text-slate-400">by the</span>
             <Link
-              className="hover:text-primary-200 font-medium text-slate-400 underline decoration-dashed decoration-0 underline-offset-4 transition-colors"
+              className="font-medium text-slate-400 underline decoration-dashed decoration-0 underline-offset-4 transition-colors hover:text-primary-200"
               href="https://github.com/Indie-Creator-Community"
               target="_blank"
             >
@@ -65,15 +101,24 @@ const Home: NextPage = (_props: InferGetServerSidePropsType<typeof getServerSide
             </Link>
           </div>
         </div>
+        <DottedBackground
+          className="absolute -top-40 md:hidden"
+          dotsSize={DottedBgSize.base}
+          dotsColors="from-slate-500"
+          dotsSeparation={DottedBgSeparation.sm}
+          maskTransparency={90}
+          isLinear={true}
+        />
+        <DottedBackground
+          className="absolute -top-40 hidden md:block"
+          dotsSize={DottedBgSize.base}
+          dotsSeparation={DottedBgSeparation.sm}
+          dotsColors="from-slate-500"
+          maskTransparency={80}
+        />
       </main>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale ?? 'en', ['nextjs'])),
-  },
-});
-
-export default Home;
+export default Landing;
