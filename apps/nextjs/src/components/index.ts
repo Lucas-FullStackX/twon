@@ -1,5 +1,6 @@
 export * from './Avatar/Avatar';
 export * from './Icon/Icon';
+export * from './Logo/Logo';
 export * from './TextGradient/TextGradient';
 export * from './DottedBackground/DottedBackground';
 export * from './Cards';

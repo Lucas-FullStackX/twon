@@ -1,15 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { TextInput } from 'side-ui';
-import { DottedBackground, Icon, IconCatalog, Sizes, TextGradient, TweetCard } from '~/components';
+import { Icon, IconCatalog, TextInput } from 'side-ui';
+import { DottedBackground, Sizes, TextGradient, TweetCard } from '~/components';
 
-const Home: NextPage = () => {
+const Landing: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Indie Creators HQ - Side Project Starter Kit</title>
-        <meta name="description" content="Side Project Starter Kit" />
+        <title>Twon - Unleash your Tweeting Potencial</title>
+        <meta name="description" content="Unleash your Tweeting Potencial" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -94,4 +94,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Landing;
