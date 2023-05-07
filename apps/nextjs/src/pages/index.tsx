@@ -51,7 +51,7 @@ const Landing: NextPage = () => {
             />
           </div>
 
-          <div className="">
+          <div>
             <div className="mb-2 text-xl font-medium text-slate-50">Output Tweet</div>
             <TweetCard
               className="shadow-center animation-delay-1000 opacity-0 shadow-secondary-400 md:min-h-[400px] lg:min-h-[300px]"

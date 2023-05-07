@@ -10,7 +10,7 @@ export default {
       },
       fontSize: {
         'fluid-base': 'clamp(2rem, 8vw, 5rem)',
-        'fluid-sm': 'clamp(0.7rem,  1.5vw, 1rem)',
+        'fluid-sm': 'clamp(0.7rem, 1.5vw, 1rem)',
       },
       animation: {
         'fade-in': 'anime-fade-in 1s ease-in-out forwards',
