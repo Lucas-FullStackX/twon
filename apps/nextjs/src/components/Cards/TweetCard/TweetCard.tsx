@@ -42,20 +42,20 @@ export interface TweetCardProps {
 }
 
 export const TweetCard = ({
-  commentCount = 2,
+  commentCount = 1,
   className,
-  likeCount = 4,
-  retweetCount = 1,
+  likeCount = 1,
+  retweetCount = 0,
   tweetText,
   isTypingAnimationEnabled = false,
-  viewCount = 10,
+  viewCount = 20,
 }: TweetCardProps) => {
   const classes = {
     container: cn(
       className,
       'relative grid max-w-xl grid-cols-[50px_1fr] grid-rows-[1fr_50px]',
-      'items-start justify-center gap-x-4 rounded-md',
-      'border-[1px] border-solid border-slate-200',
+      'items-start justify-center gap-x-2 rounded-lg',
+      'border border-slate-600',
       'bg-black p-4 text-white animate-fade-in',
     ),
     profileImg: cn('hidden w-10 rounded-full', 'min-[420px]:block lg:w-16'),
@@ -65,8 +65,9 @@ export const TweetCard = ({
     ),
     social: cn(
       'col-start-1 col-end-3 mt-4 flex w-full',
-      'items-end justify-between gap-4 justify-self-end',
+      'items-end gap-8 justify-self-end',
       'min-[400px]:col-start-2',
+      'text-slate-400',
     ),
   };
 
@@ -94,19 +95,19 @@ export const TweetCard = ({
       <div className={classes.social}>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterComments} isSolid={true} className="w-4" />
-          <Counter start={1} end={commentCount} />
+          <Counter start={0} end={commentCount} />
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterRetweet} isSolid={true} className="w-4" />
-          <Counter start={1} end={retweetCount} />
+          <Counter start={0} end={retweetCount} />
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterHeart} isSolid={true} className="w-4" />
-          <Counter start={1} end={likeCount} />
+          <Counter start={0} end={likeCount} />
         </div>
         <div className="items flex items-center gap-2">
           <Icon icon={IconCatalog.twitterView} isSolid={true} className="w-4" />
-          <Counter start={1} end={viewCount} speed={25} />
+          <Counter start={0} end={viewCount} speed={25} />
         </div>
       </div>
     </div>

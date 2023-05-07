@@ -53,7 +53,7 @@ type TailwindColorShade =
 type TailwindColor = Exclude<AllColors, 'theme' | 'presets' | 'content'>;
 type TailwindColorString = `from-${ExcludeShades<TailwindColor>}`;
 
-export enum Sizes {
+export enum Size {
   xs = 'xs',
   sm = 'sm',
   base = 'base',
@@ -64,88 +64,37 @@ export enum Sizes {
   '4xl' = '4xl',
 }
 
-const DotsSeparations: Record<Sizes, string> = {
-  /**
-   * equivalent to 5 pixels
-   */
-  [Sizes.xs]: '0.3125rem 0.3125rem',
-
-  /**
-   * equivalent to 10 pixels
-   */
-  [Sizes.sm]: '0.625rem 0.625rem',
-
-  /**
-   * equivalent to 15 pixels
-   */
-  [Sizes.base]: '0.9375rem 0.9375rem',
-
-  /**
-   * equivalent to 20 pixels
-   */
-  [Sizes.lg]: '1.25rem 1.25rem',
-
-  /**
-   * equivalent to 25 pixels
-   */
-  [Sizes.xl]: '1.5625rem 1.5625rem',
-
-  /**
-   * equivalent to 30 pixels
-   */
-  [Sizes['2xl']]: '1.875rem 1.875rem',
-
-  /**
-   * Equivalent to 35 pixels
-   */
-  [Sizes['3xl']]: '2.1875rem 2.1875rem',
-
-  /**
-   * Equivalent to 40 pixels
-   */
-  [Sizes['4xl']]: '2.5rem 2.5rem',
+const DotsSizes: Record<Size, string> = {
+  [Size.xs]: '0.03125rem',
+  [Size.sm]: '0.0625rem',
+  [Size.base]: '0.09375rem',
+  [Size.lg]: '0.125rem',
+  [Size.xl]: '0.15625rem',
+  [Size['2xl']]: '0.1875rem',
+  [Size['3xl']]: '0.21875rem',
+  [Size['4xl']]: '0.25rem',
 };
 
-const DotsSizes: Record<Sizes, string> = {
-  /**
-   * Equivalent to 0.5 pixels
-   */
-  [Sizes.xs]: '0.03125rem',
+export enum Separation {
+  xs = 'xs',
+  sm = 'sm',
+  base = 'base',
+  lg = 'lg',
+  xl = 'xl',
+  '2xl' = '2xl',
+  '3xl' = '3xl',
+  '4xl' = '4xl',
+}
 
-  /**
-   * Equivalent to 1.0 pixels
-   */
-  [Sizes.sm]: '0.0625rem',
-
-  /**
-   * Equivalent to 1.5 pixels
-   */
-  [Sizes.base]: '0.09375rem',
-
-  /**
-   * Equivalent to 2.0 pixels
-   */
-  [Sizes.lg]: '0.125rem',
-
-  /**
-   * Equivalent to 2.5 pixels
-   */
-  [Sizes.xl]: '0.15625rem',
-
-  /**
-   * Equivalent to 3.0 pixels
-   */
-  [Sizes['2xl']]: '0.1875rem',
-
-  /**
-   * Equivalent to 3.5 pixels
-   */
-  [Sizes['3xl']]: '0.21875rem',
-
-  /**
-   * Equivalent to 4.0 pixels
-   */
-  [Sizes['4xl']]: '0.25rem',
+const DotsSeparations: Record<Separation, string> = {
+  [Separation.xs]: '0.3125rem 0.3125rem',
+  [Separation.sm]: '0.625rem 0.625rem',
+  [Separation.base]: '0.9375rem 0.9375rem',
+  [Separation.lg]: '1.25rem 1.25rem',
+  [Separation.xl]: '1.5625rem 1.5625rem',
+  [Separation['2xl']]: '1.875rem 1.875rem',
+  [Separation['3xl']]: '2.1875rem 2.1875rem',
+  [Separation['4xl']]: '2.5rem 2.5rem',
 };
 
 export enum MaskDirection {
@@ -179,7 +128,7 @@ interface DottedBackgroundProps {
   /**
    * The range of sizes for the dots.
    */
-  dotsSize?: Sizes;
+  dotsSize?: Size;
 
   /**
    * The color of the dots.
@@ -189,7 +138,7 @@ interface DottedBackgroundProps {
   /**
    * The separation between dots.
    */
-  dotsSeparation?: Sizes;
+  dotsSeparation?: Separation;
 
   /**
    * Determines whether the mask gradient is linear or radial.
@@ -209,9 +158,9 @@ interface DottedBackgroundProps {
 
 export const DottedBackground = ({
   className,
-  dotsSize = Sizes.base,
+  dotsSize = Size.base,
   dotsColors = 'from-gray-700',
-  dotsSeparation = Sizes.base,
+  dotsSeparation = Separation.base,
   isLinear = false,
   maskDirection = MaskDirection.topToBottom,
   maskTransparency = 80,

@@ -5,13 +5,12 @@ export default {
   content: ['./src/**/*.tsx', '../../node_modules/side-ui/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      boxShadow: {
+        center: '0 0 50px -12px rgb(0 0 0 / 0.25)',
+      },
       fontSize: {
         'fluid-base': 'clamp(2rem, 8vw, 5rem)',
         'fluid-sm': 'clamp(0.7rem,  1.5vw, 1rem)',
-      },
-      colors: {
-        primary: {},
-        secondary: {},
       },
       animation: {
         'fade-in': 'anime-fade-in 1s ease-in-out forwards',
