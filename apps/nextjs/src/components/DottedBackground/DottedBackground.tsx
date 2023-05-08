@@ -1,22 +1,27 @@
 import cn from 'classnames';
 import type colors from 'tailwindcss/colors';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../../../tailwind.config';
 
+// import resolveConfig from 'tailwindcss/resolveConfig';
+
+// import tailwindConfig from '../../../tailwind.config';
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+// const tailwindConfig = require('../../../tailwind.config');
 /**
  * Get the full Tailwind config by resolving
  * it from the tailwind.config.js file
  */
-const fullConfig = resolveConfig(tailwindConfig);
+// const fullConfig = resolveConfig(tailwindConfig);
 
+// TODO: Clean this comments, and move types to a types/tailwind.ts file
 /**
  * Get the default and extended colors from the Tailwind config
  */
 type defaultColors = keyof typeof colors;
-type extendedColors = typeof fullConfig.theme extends { extend: { colors: infer C } }
+/*type extendedColors = typeof fullConfig.theme extends { extend: { colors: infer C } }
   ? keyof C
-  : never;
-type AllColors = defaultColors | extendedColors;
+  : never;*/
+// type AllColors = defaultColors | extendedColors;
+type AllColors = defaultColors;
 
 /**
  * Exclude shades of certain colors
