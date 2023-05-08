@@ -35,7 +35,7 @@ const Landing: NextPage = () => {
         <section className=" animate-fade-in z-10 mb-4 flex flex-col items-center gap-10 text-white opacity-0">
           <Logo variant={LogoVariant.light} size={LogoSize.md} type={LogoType.complete} />
           <TextGradient gradientStartColor="from-[#e8b066]" gradientEndColor="to-[#df12ff]">
-            <h1 className="text-shadow-glow text-fluid-base z-10 max-w-3xl text-center font-bold leading-none">
+            <h1 className="text-shadow-glow text-fluid-base z-10 max-w-[14ch] text-center font-bold leading-none">
               Unleash your Tweeting Potencial
             </h1>
           </TextGradient>
