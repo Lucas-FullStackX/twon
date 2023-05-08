@@ -61,7 +61,7 @@ const Landing: NextPage = () => {
             <div className="mb-2 text-xl font-medium text-slate-50">Input Tweet</div>
             <TweetCard
               className="animation-delay-500 opacity-0 lg:max-h-[200px]"
-              tweetText="  Do you want to charge more than $7/month for your product? You can try offering aone-time payment for life, show it to new users, and measure the results... I bet it will work."
+              tweetText="Do you want to charge more than $7/month for your product? You can try offering aone-time payment for life, show it to new users, and measure the results... I bet it will work."
             />
           </div>
 
