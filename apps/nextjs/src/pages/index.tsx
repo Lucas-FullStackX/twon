@@ -88,8 +88,8 @@ const Landing: NextPage = () => {
             <Icon icon={IconCatalog.gitHub} className="h-6 w-6 text-white" isSolid />
           </Link>
           <div className="mx-2 h-[30px] w-[0.5px] rotate-[20deg] transform bg-neutral-700"></div>
-          <div className="flex items-center gap-x-1">
-            <span className="text-slate-400">Made with</span>
+          <div className="text-fluid-sm flex items-center gap-x-1">
+            <span className=" text-slate-400">Made with</span>
             <Icon icon={IconCatalog.heart} className="h-4 w-4 text-red-500" isSolid />
             <span className="text-slate-400">by the</span>
             <Link
