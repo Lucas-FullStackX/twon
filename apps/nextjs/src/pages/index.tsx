@@ -40,7 +40,7 @@ const Landing: NextPage = () => {
             </h1>
           </TextGradient>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <TextInput
               className="w-64 bg-slate-950"
               onChange={handleEmailChange}
