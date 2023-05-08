@@ -35,12 +35,12 @@ const Landing: NextPage = () => {
         <section className=" animate-fade-in z-10 mb-4 flex flex-col items-center gap-10 text-white opacity-0">
           <Logo variant={LogoVariant.light} size={LogoSize.md} type={LogoType.complete} />
           <TextGradient gradientStartColor="from-[#e8b066]" gradientEndColor="to-[#df12ff]">
-            <h1 className="text-shadow-glow text-fluid-base z-10 max-w-3xl text-center font-bold leading-none">
+            <h1 className="text-shadow-glow text-fluid-base z-10 max-w-[14ch] text-center font-bold leading-none">
               Unleash your Tweeting Potencial
             </h1>
           </TextGradient>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <TextInput
               className="w-64 bg-slate-950"
               onChange={handleEmailChange}
@@ -61,7 +61,7 @@ const Landing: NextPage = () => {
             <div className="mb-2 text-xl font-medium text-slate-50">Input Tweet</div>
             <TweetCard
               className="animation-delay-500 opacity-0 lg:max-h-[200px]"
-              tweetText="  Do you want to charge more than $7/month for your product? You can try offering aone-time payment for life, show it to new users, and measure the results... I bet it will work."
+              tweetText="Do you want to charge more than $7/month for your product? You can try offering aone-time payment for life, show it to new users, and measure the results... I bet it will work."
             />
           </div>
 
@@ -88,7 +88,7 @@ const Landing: NextPage = () => {
             <Icon icon={IconCatalog.gitHub} className="h-6 w-6 text-white" isSolid />
           </Link>
           <div className="mx-2 h-[30px] w-[0.5px] rotate-[20deg] transform bg-neutral-700"></div>
-          <div className="flex items-center gap-x-1">
+          <div className="flex items-center gap-x-1 text-xs sm:text-base">
             <span className="text-slate-400">Made with</span>
             <Icon icon={IconCatalog.heart} className="h-4 w-4 text-red-500" isSolid />
             <span className="text-slate-400">by the</span>
