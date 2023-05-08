@@ -65,8 +65,8 @@ export const TweetCard = ({
     ),
     social: cn(
       'col-start-1 col-end-3 mt-4 flex w-full',
-      'items-end gap-8 justify-self-end',
-      'min-[400px]:col-start-2',
+      'items-end max-w-[320px] justify-between',
+      'min-[420px]:col-start-2',
       'text-slate-400',
     ),
   };
@@ -105,7 +105,7 @@ export const TweetCard = ({
           <Icon icon={IconCatalog.twitterHeart} isSolid={true} className="w-4" />
           <Counter start={0} end={likeCount} />
         </div>
-        <div className="items flex items-center gap-2">
+        <div className="items max-[360px]:hidden flex items-center gap-2">
           <Icon icon={IconCatalog.twitterView} isSolid={true} className="w-4" />
           <Counter start={0} end={viewCount} speed={25} />
         </div>
